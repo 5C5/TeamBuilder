@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:cache="http://www.springframework.org/schema/cache"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/cache
+		    http://www.springframework.org/schema/cache/spring-cache.xsd">
+	
+    <import resource="db-config.xml" />
+    
+<!--     Service -->
+<!--     <bean id="typeService" class="team.service.impl.TypeServiceImpl"> -->
+<!--         <property name="typeDAO" ref="typeDAO"></property> -->
+<!--     </bean> -->
+    
+<!--     DAO -->
+<!--     <bean id="typeDAO" class="team.dao.impl.TypeDAOImpl"> -->
+<!--         <property name="sessionFactory" ref="sessionFactory" /> -->
+<!--     </bean> -->
+<!--     <bean id="pokemonDAO" class="team.dao.impl.PokemonDAOImpl"> -->
+<!--         <property name="sessionFactory" ref="sessionFactory" /> -->
+<!--     </bean> -->
+
+    
+</beans> 

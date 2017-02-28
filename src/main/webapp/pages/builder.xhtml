@@ -1,0 +1,98 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/template.xhtml">
+
+    <ui:define name="head"></ui:define>
+    
+    <ui:define name="title">#{fr['general.team.builder']}</ui:define>
+
+    <ui:define name="body-site">
+        <h:form id="formTeam">
+            <p:panel style="margin: 0 auto;" header="#{fr['general.team.builder']}">
+                
+                <p:commandButton value="Ajouter Pokémon" icon="ui-icon-plus" update="tablePoke" 
+                            actionListener="#{teamBuilderMBean.ajoutPoke}"/>
+                            
+                
+                <p:dataTable id="tablePoke" var="poke" value="#{teamBuilderMBean.listePokemon}" editable="true" >
+                    <p:column style="width:16px">
+                        <p:rowToggler />
+                    </p:column>
+                    
+                    <p:column style="width:16px">
+                        <p:selectBooleanCheckbox value="#{poke.actif}" />
+                    </p:column>
+                    <p:column style="width:32px">
+                       <p:rowEditor />
+                    </p:column>
+                    
+                    <p:column headerText="Pokémon">
+                        <p:cellEditor>
+                           <f:facet name="output"><h:outputText value="#{poke.espece}" /></f:facet>
+                           <f:facet name="input"><p:inputText value="#{poke.espece}" /></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Nom">
+                        <p:cellEditor>
+                           <f:facet name="output"><h:outputText value="#{poke.nom}" /></f:facet>
+                           <f:facet name="input"><p:inputText value="#{poke.nom}" /></f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column headerText="Type">
+                        <p:cellEditor>
+                           <f:facet name="output"><h:outputText value="#{poke.type1}" /></f:facet>
+                           <f:facet name="input">
+                           <h:selectOneMenu value="#{poke.type1}" >
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItems value="#{teamBuilderMBean.listeType}" var="type" itemLabel="#{type}" itemValue="#{type}" />
+                           </h:selectOneMenu>
+                           </f:facet>
+                        </p:cellEditor>
+                        
+                    </p:column>
+                    <p:column headerText="Type">
+                        <p:cellEditor>
+                           <f:facet name="output"><h:outputText value="#{poke.type2}" /></f:facet>
+                           <f:facet name="input">
+                           <h:selectOneMenu value="#{poke.type2}" >
+                                <f:selectItem itemLabel="" itemValue=""/>
+                                <f:selectItems value="#{teamBuilderMBean.listeType}" var="type" itemLabel="#{type}" itemValue="#{type}" />
+                           </h:selectOneMenu>
+                           </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+             
+                    <p:rowExpansion>
+                        <p:dataTable var="attaque" value="#{poke.attaques}" editable="true" >
+                            <p:column headerText="" style="width:20px">
+                                <p:selectBooleanCheckbox value="#{attaque.actif}" />
+                            </p:column>
+                            <p:column headerText="Nom">
+                                <h:outputText value="#{attaque.nom}" />
+                            </p:column>
+                            <p:column headerText="Précision">
+                                <h:outputText value="#{attaque.precision}" />
+                            </p:column>
+                            <p:column headerText="Puissance">
+                                <h:outputText value="#{attaque.puissance}" />
+                            </p:column>
+                            <p:column headerText="Genre">
+                                <p:selectOneButton value="#{attaque.genre}">
+                                    <f:selectItem itemLabel="Physique" itemValue="physique" />
+                                    <f:selectItem itemLabel="Spécial" itemValue="special" />
+                                </p:selectOneButton>
+                            </p:column>
+                        </p:dataTable>
+                        
+                    </p:rowExpansion>
+                </p:dataTable>
+                
+            </p:panel>
+         </h:form> 
+	</ui:define>
+
+</ui:composition>
