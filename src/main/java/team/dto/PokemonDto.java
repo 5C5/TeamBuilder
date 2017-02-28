@@ -10,6 +10,8 @@ import lombok.Setter;
 @Setter
 public class PokemonDto {
 
+    private Integer id;
+
     private String nom;
     private String espece;
 

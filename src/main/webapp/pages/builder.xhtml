@@ -14,9 +14,10 @@
         <h:form id="formTeam">
             <p:panel style="margin: 0 auto;" header="#{fr['general.team.builder']}">
                 
-                <p:commandButton value="Ajouter Pokémon" icon="ui-icon-plus" update="tablePoke" 
-                            actionListener="#{teamBuilderMBean.ajoutPoke}"/>
-                            
+                <p:commandButton type="submit" value="Ajouter Pokémon" icon="ui-icon-plus" update="tablePoke" 
+                            actionListener="#{teamBuilderMBean.ajoutPoke}" ajax="true"/>
+                                
+                <br/>
                 
                 <p:dataTable id="tablePoke" var="poke" value="#{teamBuilderMBean.listePokemon}" editable="true" >
                     <p:column style="width:16px">
@@ -29,6 +30,14 @@
                     <p:column style="width:32px">
                        <p:rowEditor />
                     </p:column>
+                    
+                    <p:column style="width:50px">
+                        <p:commandButton type="submit" icon="ui-icon-plus" update="tablePoke" style="width:20px; height:20px"
+                                actionListener="#{teamBuilderMBean.ajouterAttaque(poke.id)}" ajax="true"/>
+                        <p:commandButton type="submit" icon="ui-icon-minus" update="tablePoke" style="width:20px; height:20px"
+                                actionListener="#{teamBuilderMBean.retirerAttaque(poke.id)}" ajax="true"/>
+                    </p:column>
+                    <br/>
                     
                     <p:column headerText="Pokémon">
                         <p:cellEditor>
@@ -67,24 +76,55 @@
                     </p:column>
              
                     <p:rowExpansion>
-                        <p:dataTable var="attaque" value="#{poke.attaques}" editable="true" >
+                        <p:dataTable var="attaque" value="#{poke.attaques}" editable="true" styleClass="hide-column-names">
                             <p:column headerText="" style="width:20px">
                                 <p:selectBooleanCheckbox value="#{attaque.actif}" />
                             </p:column>
-                            <p:column headerText="Nom">
-                                <h:outputText value="#{attaque.nom}" />
+
+                            <p:column style="width:32px">
+                               <p:rowEditor />
                             </p:column>
-                            <p:column headerText="Précision">
-                                <h:outputText value="#{attaque.precision}" />
+                    
+                            <p:column >
+                                <p:cellEditor>
+                                   <f:facet name="output"><h:outputText value="#{attaque.nom}" /></f:facet>
+                                   <f:facet name="input"><p:inputText value="#{attaque.nom}" placeholder="Nom"/></f:facet>
+                                </p:cellEditor>
                             </p:column>
-                            <p:column headerText="Puissance">
-                                <h:outputText value="#{attaque.puissance}" />
+                            <p:column >
+                                <p:cellEditor>
+                                   <f:facet name="output"><h:outputText value="#{attaque.type}" /></f:facet>
+                                   <f:facet name="input">
+                                   <h:selectOneMenu value="#{attaque.type}" >
+                                        <f:selectItem itemLabel="" itemValue=""/>
+                                        <f:selectItems value="#{teamBuilderMBean.listeType}" var="type" itemLabel="#{type}" itemValue="#{type}" />
+                                   </h:selectOneMenu>
+                                   </f:facet>
+                                </p:cellEditor>
                             </p:column>
-                            <p:column headerText="Genre">
-                                <p:selectOneButton value="#{attaque.genre}">
-                                    <f:selectItem itemLabel="Physique" itemValue="physique" />
-                                    <f:selectItem itemLabel="Spécial" itemValue="special" />
-                                </p:selectOneButton>
+                            <p:column >
+                                <p:cellEditor>
+                                   <f:facet name="output"><h:outputText value="#{attaque.precision}" /></f:facet>
+                                   <f:facet name="input"><p:inputText value="#{attaque.precision}" placeholder="Précision" /></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column >
+                                <p:cellEditor>
+                                   <f:facet name="output"><h:outputText value="#{attaque.puissance}" /></f:facet>
+                                   <f:facet name="input"><p:inputText value="#{attaque.puissance}" placeholder="Puissance"/></f:facet>
+                                </p:cellEditor>
+                            </p:column>
+                            <p:column >
+                                <p:cellEditor>
+                                   <f:facet name="output"><h:outputText value="#{attaque.genre}" /></f:facet>
+                                   <f:facet name="input">
+                                        <p:selectOneButton value="#{attaque.genre}">
+                                            <f:selectItem itemLabel="Physique" itemValue="Physique" />
+                                            <f:selectItem itemLabel="Spécial" itemValue="Spécial" />
+                                        </p:selectOneButton>
+                                   </f:facet>
+                                </p:cellEditor>
+                                
                             </p:column>
                         </p:dataTable>
                         
