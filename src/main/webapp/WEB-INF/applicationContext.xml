@@ -11,9 +11,9 @@
     <import resource="db-config.xml" />
     
 <!--     Service -->
-<!--     <bean id="typeService" class="team.service.impl.TypeServiceImpl"> -->
+    <bean id="typeService" class="team.service.impl.TypeServiceImpl">
 <!--         <property name="typeDAO" ref="typeDAO"></property> -->
-<!--     </bean> -->
+    </bean>
     
 <!--     DAO -->
 <!--     <bean id="typeDAO" class="team.dao.impl.TypeDAOImpl"> -->

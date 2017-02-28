@@ -19,4 +19,9 @@ public interface TypeService {
      */
     public List<TypeDto> getTableType();
 
+    public TypeDto fusionType(final TypeDto type1, final TypeDto type2, final boolean force);
+
+    public TypeDto sommeType(final TypeDto type1, final TypeDto type2, final boolean force);
+
+    public TypeDto getTypeDto(final String type);
 }

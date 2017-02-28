@@ -40,4 +40,11 @@
   border:1px solid !important;
 }
 
+.actif{
+	background-color: green;
+}
+.inactif{
+	background-color: red;
+}
+
 
