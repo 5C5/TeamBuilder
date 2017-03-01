@@ -5,21 +5,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ApplicationScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
 
 import lombok.Getter;
 import lombok.Setter;
 import team.dto.AttaqueDto;
 import team.dto.FaiblesseDto;
 import team.dto.PokemonDto;
+import team.dto.StatDto;
 import team.dto.TypeDto;
 import team.service.TypeService;
 
 @ManagedBean
 // @Scope("view")
-@ViewScoped
+// @ViewScoped
+@ApplicationScoped
 @Getter
 @Setter
 public class TeamBuilder2MBean extends AbstractMBean implements Serializable{
@@ -43,6 +45,8 @@ public class TeamBuilder2MBean extends AbstractMBean implements Serializable{
     private String nom = "";
     private String type1 = "";
     private String type2 = "";
+    private String nature = "";
+    private String talent = "";
 
     /** Liste des faiblesses */
     private List<FaiblesseDto> listeFaiblesses;
@@ -59,43 +63,7 @@ public class TeamBuilder2MBean extends AbstractMBean implements Serializable{
         if (this.listePokemon == null) {
             this.listePokemon = new ArrayList<PokemonDto>();
         }
-        this.listeType.add("Acier");
-        this.listeType.add("Combat");
-        this.listeType.add("Dragon");
-        this.listeType.add("Eau");
-        this.listeType.add("Electr");
-        this.listeType.add("Feu");
-        this.listeType.add("Glace");
-        this.listeType.add("Insect");
-        this.listeType.add("Normal");
-        this.listeType.add("Plante");
-        this.listeType.add("Poison");
-        this.listeType.add("Psy");
-        this.listeType.add("Roche");
-        this.listeType.add("Sol");
-        this.listeType.add("Spectr");
-        this.listeType.add("Tenebr");
-        this.listeType.add("Vol");
-        this.listeType.add("Fee");
-
-        PokemonDto poke = new PokemonDto();
-        poke.setNom("Natoo");
-        poke.setEspece("Arcanin");
-        poke.setType1("Feu");
-        poke.setId(0);
-        poke.setActif(true);
-        AttaqueDto att1 = new AttaqueDto();
-        AttaqueDto att2 = new AttaqueDto();
-        poke.getAttaques().add(att1);
-        poke.getAttaques().add(att2);
-        this.listePokemon.add(poke);
-        PokemonDto poke2 = new PokemonDto();
-        poke2.setNom("Boulon");
-        poke2.setEspece("Magezone");
-        poke2.setType1("Electr");
-        poke2.setId(1);
-        poke2.setActif(true);
-        this.listePokemon.add(poke2);
+        this.initListeAttaques();
     }
 
     public void ajoutPoke() {
@@ -105,6 +73,15 @@ public class TeamBuilder2MBean extends AbstractMBean implements Serializable{
         poke.setNom(this.nom);
         poke.setType1(this.type1);
         poke.setType2(this.type2);
+        poke.setNature(this.nature);
+        poke.setTalent(this.talent);
+        poke.setStats(new ArrayList<StatDto>());
+        poke.getStats().add(new StatDto("PV"));
+        poke.getStats().add(new StatDto("Att"));
+        poke.getStats().add(new StatDto("Déf"));
+        poke.getStats().add(new StatDto("AttSpé"));
+        poke.getStats().add(new StatDto("DéfSpé"));
+        poke.getStats().add(new StatDto("Vit"));
         poke.setAttaques(new ArrayList<AttaqueDto>());
         poke.getAttaques().add(new AttaqueDto());
         poke.getAttaques().add(new AttaqueDto());
@@ -150,5 +127,45 @@ public class TeamBuilder2MBean extends AbstractMBean implements Serializable{
 
     }
 
+    private void initListeAttaques() {
+        this.listeType.add("Acier");
+        this.listeType.add("Combat");
+        this.listeType.add("Dragon");
+        this.listeType.add("Eau");
+        this.listeType.add("Electr");
+        this.listeType.add("Feu");
+        this.listeType.add("Glace");
+        this.listeType.add("Insect");
+        this.listeType.add("Normal");
+        this.listeType.add("Plante");
+        this.listeType.add("Poison");
+        this.listeType.add("Psy");
+        this.listeType.add("Roche");
+        this.listeType.add("Sol");
+        this.listeType.add("Spectr");
+        this.listeType.add("Tenebr");
+        this.listeType.add("Vol");
+        this.listeType.add("Fee");
+    }
 
+    private void initPoke() {
+        PokemonDto poke = new PokemonDto();
+        poke.setNom("Natoo");
+        poke.setEspece("Arcanin");
+        poke.setType1("Feu");
+        poke.setId(0);
+        poke.setActif(true);
+        AttaqueDto att1 = new AttaqueDto();
+        AttaqueDto att2 = new AttaqueDto();
+        poke.getAttaques().add(att1);
+        poke.getAttaques().add(att2);
+        this.listePokemon.add(poke);
+        PokemonDto poke2 = new PokemonDto();
+        poke2.setNom("Boulon");
+        poke2.setEspece("Magezone");
+        poke2.setType1("Electr");
+        poke2.setId(1);
+        poke2.setActif(true);
+        this.listePokemon.add(poke2);
+    }
 }

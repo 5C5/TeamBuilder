@@ -1,0 +1,170 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/templates/template.xhtml">
+
+    <ui:define name="head"></ui:define>
+    
+    <ui:define name="title">#{fr['general.team.builder']}</ui:define>
+
+    <ui:define name="body-site">
+        <h:form id="formTeam">
+            <p:panel style="margin: 0 auto;" header="#{fr['general.team.builder']}">
+                
+                <p:commandButton value="Ajouter Pokémon" icon="ui-icon-plus" type="button" onclick="PF('dialogAjoutPokemon').show();" />
+                <br/>
+                
+                <ui:repeat value="#{teamBuilder2MBean.listePokemon}" var="poke">
+                    <br/>
+                    <p:fieldset legend="#{poke.espece} - #{poke.nom}" collapsed="true"
+                            toggleable="true" toggleSpeed="500">
+                            
+                            <p:panelGrid columns="4" align="center"  styleClass="panelGridBorder">
+                                <p:outputLabel value="Actif" /><p:selectBooleanCheckbox  value="#{poke.actif}"/>
+                                <p:commandButton value="Modifier" type="button" />
+                                <p:commandButton value="Supprimer" type="button" />
+                            </p:panelGrid>
+                            
+                            <p:panelGrid columns="2"  styleClass="panelGridBorder" >
+                                <p:panelGrid columns="2"  styleClass="panelGridBorder" style="width:200px">
+                                    <p:outputLabel value="Type : " style="width:80px"/>
+                                    <p:panelGrid columns="2" styleClass="panelGridBorder">
+                                        <h:outputText value="#{poke.type1}" />
+                                        <h:outputText value="#{poke.type2}" />
+                                    </p:panelGrid>
+                                    <p:outputLabel value="Nature : " />
+                                    <h:outputText value="#{poke.nature}" />
+                                    <p:outputLabel value="Talent : " />
+                                    <h:outputText value="#{poke.talent}" />
+                                </p:panelGrid>
+                                <p:panelGrid columns="3" align="center" styleClass="panelGridBorder" style="width : 200px">
+                                    <p:dataTable var="stat" value="#{poke.stats}" editable="true" editMode="cell" styleClass="hide-column-names" >
+                                        <p:column style="width : 80px">
+                                            <p:outputLabel value="#{stat.nom} : " />
+                                        </p:column>
+                                        <p:column >
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{stat.base}" style="width : 50px"/></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{stat.base}" style="width : 50px"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                        <p:column >
+                                            <p:cellEditor>
+                                                <f:facet name="output"><h:outputText value="#{stat.bonus}" style="width : 50px"/></f:facet>
+                                                <f:facet name="input"><p:inputText value="#{stat.bonus}" style="width : 50px"/></f:facet>
+                                            </p:cellEditor>
+                                        </p:column>
+                                    </p:dataTable>
+                                </p:panelGrid>
+                            </p:panelGrid>
+                            
+                            <p:dataTable var="attaque" value="#{poke.attaques}" editable="true" styleClass="hide-column-names" >
+                                <p:column headerText="" style="width:20px">
+                                    <p:selectBooleanCheckbox value="#{attaque.actif}" />
+                                </p:column>
+    
+                                <p:column style="width:32px">
+                                   <p:rowEditor />
+                                </p:column>
+                        
+                                <p:column >
+                                    <p:cellEditor>
+                                       <f:facet name="output"><h:outputText value="#{attaque.nom}" /></f:facet>
+                                       <f:facet name="input"><p:inputText value="#{attaque.nom}" placeholder="Nom" style="width:150px"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column >
+                                    <p:cellEditor>
+                                       <f:facet name="output"><h:outputText value="#{attaque.type}" /></f:facet>
+                                       <f:facet name="input">
+                                       <p:selectOneMenu value="#{attaque.type}" style="width:150px">
+                                            <f:selectItem itemLabel="" itemValue=""/>
+                                            <f:selectItems value="#{teamBuilder2MBean.listeType}" var="type" itemLabel="#{type}" itemValue="#{type}" />
+                                       </p:selectOneMenu>
+                                       </f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column >
+                                    <p:cellEditor>
+                                       <f:facet name="output"><h:outputText value="#{attaque.precision}%" /></f:facet>
+                                       <f:facet name="input"><p:inputText value="#{attaque.precision}" placeholder="Précision" style="width:150px"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column >
+                                    <p:cellEditor>
+                                       <f:facet name="output"><h:outputText value="#{attaque.puissance}" /></f:facet>
+                                       <f:facet name="input"><p:inputText value="#{attaque.puissance}" placeholder="Puissance" style="width:150px"/></f:facet>
+                                    </p:cellEditor>
+                                </p:column>
+                                <p:column >
+                                    <p:cellEditor>
+                                       <f:facet name="output"><h:outputText value="#{attaque.genre}" /></f:facet>
+                                       <f:facet name="input">
+                                            <p:selectOneButton value="#{attaque.genre}" >
+                                                <f:selectItem itemLabel="Physique" itemValue="Physique" />
+                                                <f:selectItem itemLabel="Spécial" itemValue="Spécial" />
+                                            </p:selectOneButton>
+                                       </f:facet>
+                                    </p:cellEditor>
+                                    
+                                </p:column>
+                                
+                            </p:dataTable>
+                    </p:fieldset>
+                </ui:repeat>
+                
+            </p:panel>
+            
+            <p:panel style="margin: 0 auto;" header="Défenses">
+                <p:commandButton type="submit" value="Actualiser" update="tableFaiblesse" 
+                            actionListener="#{teamBuilder2MBean.calculFaiblesse}" ajax="true"/>
+                <p:dataTable var="faible" value="#{teamBuilder2MBean.listeFaiblesses}" id="tableFaiblesse"
+                        rowStyleClass="#{faible.actif ? 'actif' : 'inactif'}">
+                    <p:column headerText="Pokémon">
+                        <p:outputLabel value="#{faible.espece} - #{faible.nom}"/>
+                    </p:column>
+                    <p:column headerText="Acier" footerText="#{teamBuilder2MBean.totalFaiblesse.type.acier}">
+                        <p:outputLabel value="#{faible.type.acier}"/>
+                    </p:column>
+                    <p:column headerText="Combat" footerText="#{teamBuilder2MBean.totalFaiblesse.type.combat}">
+                        <p:outputLabel value="#{faible.type.combat}"/>
+                    </p:column>
+                    <p:column headerText="Dragon" footerText="#{teamBuilder2MBean.totalFaiblesse.type.dragon}">
+                        <p:outputLabel value="#{faible.type.dragon}"/>
+                    </p:column>
+                    <p:column headerText="Eau" footerText="#{teamBuilder2MBean.totalFaiblesse.type.eau}">
+                        <p:outputLabel value="#{faible.type.eau}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+            
+            <p:dialog header="Ajouter un Pokémon" widgetVar="dialogAjoutPokemon">
+                <p:panelGrid columns="2" align="center" style="margin: 0 auto;" styleClass="panelGridBorder">
+                    <p:outputLabel value="Pokemon : " /><p:inputText value="#{teamBuilder2MBean.espece}" style="width:150px"/>
+                    <p:outputLabel value="Nom : " /><p:inputText value="#{teamBuilder2MBean.nom}" style="width:150px"/>
+                    <p:outputLabel value="Type : " />
+                        <p:selectOneMenu value="#{teamBuilder2MBean.type1}" style="width:130px" >
+                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItems value="#{teamBuilder2MBean.listeType}" var="type" itemLabel="#{type}" itemValue="#{type}" />
+                        </p:selectOneMenu>
+                        <p:column/>
+                        <p:selectOneMenu value="#{teamBuilder2MBean.type2}"  style="width:130px">
+                            <f:selectItem itemLabel="" itemValue=""/>
+                            <f:selectItems value="#{teamBuilder2MBean.listeType}" var="type" itemLabel="#{type}" itemValue="#{type}" />
+                        </p:selectOneMenu>
+                   <p:outputLabel value="Nature : " /><p:inputText value="#{teamBuilder2MBean.nature}" style="width:150px"/>
+                   <p:outputLabel value="Talent : " /><p:inputText value="#{teamBuilder2MBean.talent}" style="width:150px"/>
+                </p:panelGrid>
+                <p:panelGrid columns="1" align="center" style="margin: 0 auto;">
+                    <p:commandButton type="submit" value="Valider" update="@form" 
+                            actionListener="#{teamBuilder2MBean.ajoutPoke}" ajax="true"/>
+                                
+                </p:panelGrid>
+            </p:dialog>
+         </h:form> 
+	</ui:define>
+
+</ui:composition>
