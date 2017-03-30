@@ -13,9 +13,11 @@ import lombok.Getter;
 import lombok.Setter;
 import team.dto.AttaqueDto;
 import team.dto.FaiblesseDto;
+import team.dto.NatureDto;
 import team.dto.PokemonDto;
 import team.dto.StatDto;
 import team.dto.TypeDto;
+import team.service.InitService;
 import team.service.TypeService;
 
 @ManagedBean
@@ -31,9 +33,13 @@ public class TeamBuilder2MBean extends AbstractMBean implements Serializable{
      */
     private static final long serialVersionUID = 5643895082516260405L;
 
-    /** Service Notion */
+    /** Type service */
     @ManagedProperty(value = "#{typeService}")
     private TypeService typeService;
+
+    /** Init service */
+    @ManagedProperty(value = "#{initService}")
+    private InitService initService;
 
     /** Table des types */
     private List<TypeDto> tableType = new ArrayList<TypeDto>();
@@ -48,12 +54,18 @@ public class TeamBuilder2MBean extends AbstractMBean implements Serializable{
     private String nature = "";
     private String talent = "";
 
+    /** Pokemon en cours de modification */
+    private Integer idPokemonEnCours;
+
     /** Liste des faiblesses */
     private List<FaiblesseDto> listeFaiblesses;
     private FaiblesseDto totalFaiblesse;
 
     /** Liste des types */
     private List<String> listeType = new ArrayList<String>();
+
+    /** Liste des natures */
+    private List<NatureDto> listeNature = new ArrayList<NatureDto>();
 
     @PostConstruct
     public void init() {
@@ -63,7 +75,8 @@ public class TeamBuilder2MBean extends AbstractMBean implements Serializable{
         if (this.listePokemon == null) {
             this.listePokemon = new ArrayList<PokemonDto>();
         }
-        this.initListeAttaques();
+        this.listeType = this.initService.initListeType();
+        this.listeNature = this.initService.initListeNature();
     }
 
     public void ajoutPoke() {
@@ -73,21 +86,18 @@ public class TeamBuilder2MBean extends AbstractMBean implements Serializable{
         poke.setNom(this.nom);
         poke.setType1(this.type1);
         poke.setType2(this.type2);
-        poke.setNature(this.nature);
+        poke.setNature(new NatureDto(this.nature));
         poke.setTalent(this.talent);
-        poke.setStats(new ArrayList<StatDto>());
-        poke.getStats().add(new StatDto("PV"));
-        poke.getStats().add(new StatDto("Att"));
-        poke.getStats().add(new StatDto("Déf"));
-        poke.getStats().add(new StatDto("AttSpé"));
-        poke.getStats().add(new StatDto("DéfSpé"));
-        poke.getStats().add(new StatDto("Vit"));
-        poke.setAttaques(new ArrayList<AttaqueDto>());
-        poke.getAttaques().add(new AttaqueDto());
-        poke.getAttaques().add(new AttaqueDto());
-        poke.getAttaques().add(new AttaqueDto());
-        poke.getAttaques().add(new AttaqueDto());
+        poke.setNiveau(100);
         this.listePokemon.add(poke);
+
+        // reset
+        this.espece = "";
+        this.nom = "";
+        this.type1 = "";
+        this.type2 = "";
+        this.nature = "";
+        this.talent = "";
     }
 
     public void ajouterAttaque(final int id) {
@@ -107,45 +117,13 @@ public class TeamBuilder2MBean extends AbstractMBean implements Serializable{
     }
 
     public void calculFaiblesse() {
-        this.listeFaiblesses = new ArrayList<FaiblesseDto>();
+        this.listeFaiblesses = this.typeService.getTeamFaiblesse(this.listePokemon);
         this.totalFaiblesse = new FaiblesseDto();
-        for (PokemonDto poke : this.listePokemon) {
-            FaiblesseDto faible = new FaiblesseDto();
-            faible.setEspece(poke.getEspece());
-            faible.setNom(poke.getNom());
-            faible.setActif(poke.isActif());
-            faible.setType(this.typeService.fusionType(this.typeService.getTypeDto(poke.getType1()), this.typeService.getTypeDto(poke.getType2()), false));
-            if (poke.isActif()) {
-                this.totalFaiblesse.setType(this.typeService.sommeType(this.totalFaiblesse.getType(), faible.getType(), false));
-            }
-            this.listeFaiblesses.add(faible);
-        }
 
     }
 
     public void calculForce() {
 
-    }
-
-    private void initListeAttaques() {
-        this.listeType.add("Acier");
-        this.listeType.add("Combat");
-        this.listeType.add("Dragon");
-        this.listeType.add("Eau");
-        this.listeType.add("Electr");
-        this.listeType.add("Feu");
-        this.listeType.add("Glace");
-        this.listeType.add("Insect");
-        this.listeType.add("Normal");
-        this.listeType.add("Plante");
-        this.listeType.add("Poison");
-        this.listeType.add("Psy");
-        this.listeType.add("Roche");
-        this.listeType.add("Sol");
-        this.listeType.add("Spectr");
-        this.listeType.add("Tenebr");
-        this.listeType.add("Vol");
-        this.listeType.add("Fee");
     }
 
     private void initPoke() {
@@ -167,5 +145,32 @@ public class TeamBuilder2MBean extends AbstractMBean implements Serializable{
         poke2.setId(1);
         poke2.setActif(true);
         this.listePokemon.add(poke2);
+    }
+
+    public void onCellEditStat(final PokemonDto pokeEnCours) {
+        for (StatDto stat : pokeEnCours.getStats()) {
+            stat.setTotal(stat.calculTotal(pokeEnCours.getNature().getBonus(), pokeEnCours.getNature().getMalus(), pokeEnCours.getNiveau()));
+        }
+    }
+
+    public void updatePoke(final Integer id) {
+        PokemonDto pokeEnCours = this.listePokemon.get(id);
+        if (pokeEnCours != null) {
+            pokeEnCours.updateChartStat();
+            // pokeEnCours.updateTotalStat();
+        }
+    }
+
+    public String supprimerPoke(final Integer id) {
+        List<PokemonDto> listeRemoved = new ArrayList<PokemonDto>();
+        for (int i = 0; i < this.listePokemon.size(); i++) {
+            if (i != id) {
+                listeRemoved.add(this.listePokemon.get(i));
+            }
+        }
+        this.listePokemon = new ArrayList<PokemonDto>();
+        this.listePokemon.addAll(listeRemoved);
+        System.out.println(this.listePokemon.size());
+        return "builder2";
     }
 }

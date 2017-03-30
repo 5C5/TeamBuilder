@@ -2,6 +2,8 @@ package team.service;
 
 import java.util.List;
 
+import team.dto.FaiblesseDto;
+import team.dto.PokemonDto;
 import team.dto.TypeDto;
 
 
@@ -24,4 +26,6 @@ public interface TypeService {
     public TypeDto sommeType(final TypeDto type1, final TypeDto type2, final boolean force);
 
     public TypeDto getTypeDto(final String type);
+
+    public List<FaiblesseDto> getTeamFaiblesse(final List<PokemonDto> team);
 }

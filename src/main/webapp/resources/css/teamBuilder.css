@@ -45,10 +45,14 @@ body{
 }
 
 .actif{
-	background-color: green;
+	background-color: yellowgreen;
 }
 .inactif{
-	background-color: red;
+	background-color: tomato;
 }
+.faible{
+	background-color: tomato;
+}
+
 
 

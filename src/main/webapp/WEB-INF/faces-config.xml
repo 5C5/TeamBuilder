@@ -52,6 +52,12 @@ http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
             <to-view-id>/pages/builder2.xhtml</to-view-id>
             <redirect />
         </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>test</from-outcome>
+            <to-view-id>/pages/test.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
     </navigation-rule>
 
 </faces-config>

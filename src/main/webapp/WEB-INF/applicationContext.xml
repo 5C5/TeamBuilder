@@ -15,6 +15,9 @@
 <!--         <property name="typeDAO" ref="typeDAO"></property> -->
     </bean>
     
+    <bean id="initService" class="team.service.impl.InitServiceImpl">
+    </bean>
+    
 <!--     DAO -->
 <!--     <bean id="typeDAO" class="team.dao.impl.TypeDAOImpl"> -->
 <!--         <property name="sessionFactory" ref="sessionFactory" /> -->

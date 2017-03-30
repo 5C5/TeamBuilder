@@ -59,6 +59,70 @@ public final class Constants {
     /** Type Fee */
     public static final String FEE = "Fee";
 
+    /** PV */
+    public static final String PV = "PV";
+    /** Attaque */
+    public static final String ATTAQUE = "Att.";
+    /** Défense */
+    public static final String DEFENSE = "Def.";
+    /** Attaque spéciale */
+    public static final String ATTAQUE_SPECIAL = "Att.Spe.";
+    /** Défense spéciale */
+    public static final String DEFENSE_SPECIAL = "Def.Spe.";
+    /** Vitesse */
+    public static final String VITESSE = "Vit.";
+
+    /** Nature Hardi */
+    public static final String HARDI = "Hardi";
+    /** Nature Solo */
+    public static final String SOLO = "Solo";
+    /** Nature Rigide */
+    public static final String RIGIDE = "Rigide";
+    /** Nature Brave */
+    public static final String BRAVE = "Brave";
+    /** Nature Mauvais */
+    public static final String MAUVAIS = "Mauvais";
+    /** Nature Assuré */
+    public static final String ASSURE = "Assuré";
+    /** Nature Docile */
+    public static final String DOCILE = "Docile";
+    /** Nature Malin */
+    public static final String MALIN = "Malin";
+    /** Nature Relax */
+    public static final String RELAX = "Relax";
+    /** Nature Lâche */
+    public static final String LACHE = "Lâche";
+    /** Nature Modeste */
+    public static final String MODESTE = "Modeste";
+    /** Nature Doux */
+    public static final String DOUX = "Doux";
+    /** Nature Pudique */
+    public static final String PUDIQUE = "Pudique";
+    /** Nature Discret */
+    public static final String DISCRET = "Discret";
+    /** Nature Foufou */
+    public static final String FOUFOU = "Foufou";
+    /** Nature Timide */
+    public static final String TIMIDE = "Timide";
+    /** Nature Pressé */
+    public static final String PRESSE = "Pressé";
+    /** Nature Jovial */
+    public static final String JOVIAL = "Jovial";
+    /** Nature Sérieux */
+    public static final String SERIEUX = "Sérieux";
+    /** Nature Naïf */
+    public static final String NAIF = "Naïf";
+    /** Nature Calme */
+    public static final String CALME = "Calme";
+    /** Nature Gentil */
+    public static final String GENTIL = "Gentil";
+    /** Nature Prudent */
+    public static final String PRUDENT = "Prudent";
+    /** Nature Malpoli */
+    public static final String MALPOLI = "Malpoli";
+    /** Nature Bizarre */
+    public static final String BIZARRE = "Bizarre";
+
     /**
      * Non instantiable
      */

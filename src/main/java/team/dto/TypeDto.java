@@ -50,34 +50,4 @@ public class TypeDto {
         this.setVol(1.0);
         this.setFee(1.0);
     }
-
-    public void purge(final boolean force) {
-        if (force) {
-            this.purgeForce();
-        } else {
-            this.purgeFaiblesse();
-        }
-    }
-
-    /** Garder uniquement les forces */
-    /** Les résistances sont en dessous de 1 */
-    private void purgeForce() {
-        if (this.getAcier() >= 1) {
-            this.setAcier(null);
-        }
-        if (this.getCombat() >= 1) {
-            this.setCombat(null);
-        }
-    }
-
-    /** Garder uniquement les faiblesses */
-    /** Les faiblesses sont au dessus de 1 */
-    private void purgeFaiblesse() {
-        if (this.getAcier() <= 1) {
-            this.setAcier(null);
-        }
-        if (this.getCombat() <= 1) {
-            this.setCombat(null);
-        }
-    }
 }
