@@ -43,6 +43,12 @@ http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
         </navigation-case>
         
         <navigation-case>
+            <from-outcome>gestion</from-outcome>
+            <to-view-id>/pages/gestion.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        
+        <navigation-case>
             <from-outcome>builder</from-outcome>
             <to-view-id>/pages/builder.xhtml</to-view-id>
             <redirect />
@@ -50,6 +56,12 @@ http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
         <navigation-case>
             <from-outcome>builder2</from-outcome>
             <to-view-id>/pages/builder2.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        
+        <navigation-case>
+            <from-outcome>type</from-outcome>
+            <to-view-id>/pages/type.xhtml</to-view-id>
             <redirect />
         </navigation-case>
         

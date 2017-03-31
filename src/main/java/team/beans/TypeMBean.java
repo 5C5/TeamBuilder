@@ -14,9 +14,11 @@ import javax.servlet.http.HttpServletRequest;
 import lombok.Getter;
 import lombok.Setter;
 import team.dto.AttaqueDto;
+import team.dto.FaiblesseDto;
 import team.dto.NatureDto;
 import team.dto.PokemonDto;
 import team.dto.StatDto;
+import team.dto.TypeDto;
 import team.service.InitService;
 import team.service.TypeService;
 import team.utils.Constants;
@@ -27,12 +29,12 @@ import team.utils.Constants;
 @ApplicationScoped
 @Getter
 @Setter
-public class TeamBuilder2MBean extends AbstractMBean implements Serializable{
+public class TypeMBean extends AbstractMBean implements Serializable {
 
     /**
      * ID
      */
-    private static final long serialVersionUID = 5643895082516260405L;
+    private static final long serialVersionUID = 5783895082516260405L;
 
     /** Type service */
     @ManagedProperty(value = "#{typeService}")
@@ -41,6 +43,9 @@ public class TeamBuilder2MBean extends AbstractMBean implements Serializable{
     /** Init service */
     @ManagedProperty(value = "#{initService}")
     private InitService initService;
+
+    /** Table des types */
+    private List<TypeDto> tableType = new ArrayList<TypeDto>();
 
     /** Liste des pokémons */
     private List<PokemonDto> listePokemon;
@@ -54,6 +59,10 @@ public class TeamBuilder2MBean extends AbstractMBean implements Serializable{
 
     /** Pokemon en cours de modification */
     private Integer idPokemonEnCours;
+
+    /** Liste des faiblesses */
+    private List<FaiblesseDto> listeFaiblesses;
+    private FaiblesseDto totalFaiblesse;
 
     /** Liste des types */
     private List<String> listeType = new ArrayList<String>();
@@ -109,6 +118,37 @@ public class TeamBuilder2MBean extends AbstractMBean implements Serializable{
         poke.getAttaques().remove(poke.getAttaques().size() - 1);
     }
 
+    public void calculFaiblesse() {
+        this.listeFaiblesses = this.typeService.getTeamFaiblesse(this.listePokemon);
+        this.totalFaiblesse = new FaiblesseDto();
+
+    }
+
+    public void calculForce() {
+
+    }
+
+    private void initPoke() {
+        PokemonDto poke = new PokemonDto();
+        poke.setNom("Natoo");
+        poke.setEspece("Arcanin");
+        poke.setType1("Feu");
+        poke.setId(0);
+        poke.setActif(true);
+        AttaqueDto att1 = new AttaqueDto();
+        AttaqueDto att2 = new AttaqueDto();
+        poke.getAttaques().add(att1);
+        poke.getAttaques().add(att2);
+        this.listePokemon.add(poke);
+        PokemonDto poke2 = new PokemonDto();
+        poke2.setNom("Boulon");
+        poke2.setEspece("Magezone");
+        poke2.setType1("Electr");
+        poke2.setId(1);
+        poke2.setActif(true);
+        this.listePokemon.add(poke2);
+    }
+
     public void onCellEditStat(final PokemonDto pokeEnCours) {
         for (StatDto stat : pokeEnCours.getStats()) {
             stat.setTotal(stat.calculTotal(pokeEnCours.getNature().getBonus(), pokeEnCours.getNature().getMalus(), pokeEnCours.getNiveau()));
@@ -123,4 +163,16 @@ public class TeamBuilder2MBean extends AbstractMBean implements Serializable{
         }
     }
 
+    public String supprimerPoke(final Integer id) {
+        List<PokemonDto> listeRemoved = new ArrayList<PokemonDto>();
+        for (int i = 0; i < this.listePokemon.size(); i++) {
+            if (i != id) {
+                listeRemoved.add(this.listePokemon.get(i));
+            }
+        }
+        this.listePokemon = new ArrayList<PokemonDto>();
+        this.listePokemon.addAll(listeRemoved);
+        System.out.println(this.listePokemon.size());
+        return "builder2";
+    }
 }

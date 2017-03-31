@@ -144,70 +144,6 @@
                 
             </p:panel>
             
-            <p:panel style="margin: 0 auto;" header="Défenses">
-                <p:commandButton type="submit" value="Actualiser" update="tableFaiblesse" 
-                            actionListener="#{teamBuilder2MBean.calculFaiblesse}" ajax="true"/>
-                <p:dataTable var="faible" value="#{teamBuilder2MBean.listeFaiblesses}" id="tableFaiblesse">
-                    <p:column headerText="Pokémon">
-                        <p:outputLabel value="#{faible.espece} - #{faible.nom}"/>
-                    </p:column>
-                    <p:column headerText="Acier" footerText="#{teamBuilder2MBean.totalFaiblesse.type.acier}">
-                        <h:outputText value="#{faible.type.acier}" styleClass="#{faible.type.acier== null ? '' : 'faible'}"/>
-                    </p:column>
-                    <p:column headerText="Combat" footerText="#{teamBuilder2MBean.totalFaiblesse.type.combat}">
-                        <h:outputText value="#{faible.type.combat}" styleClass="#{faible.type.combat== null ? '' : 'faible'}"/>
-                    </p:column>
-                    <p:column headerText="Dragon" footerText="#{teamBuilder2MBean.totalFaiblesse.type.dragon}">
-                        <h:outputText value="#{faible.type.dragon}" styleClass="#{faible.type.dragon== null ? '' : 'faible'}"/>
-                    </p:column>
-                    <p:column headerText="Eau" footerText="#{teamBuilder2MBean.totalFaiblesse.type.eau}">
-                        <h:outputText value="#{faible.type.eau}" styleClass="#{faible.type.eau== null ? '' : 'faible'}"/>
-                    </p:column>
-                    <p:column headerText="Electr" footerText="#{teamBuilder2MBean.totalFaiblesse.type.electr}">
-                        <h:outputText value="#{faible.type.electr}" styleClass="#{faible.type.electr== null ? '' : 'faible'}"/>
-                    </p:column>
-                    <p:column headerText="Feu" footerText="#{teamBuilder2MBean.totalFaiblesse.type.feu}">
-                        <h:outputText value="#{faible.type.feu}" styleClass="#{faible.type.feu== null ? '' : 'faible'}"/>
-                    </p:column>
-                    <p:column headerText="Glace" footerText="#{teamBuilder2MBean.totalFaiblesse.type.glace}">
-                        <h:outputText value="#{faible.type.glace}" styleClass="#{faible.type.glace== null ? '' : 'faible'}"/>
-                    </p:column>
-                    <p:column headerText="Insect" footerText="#{teamBuilder2MBean.totalFaiblesse.type.insect}">
-                        <h:outputText value="#{faible.type.insect}" styleClass="#{faible.type.insect== null ? '' : 'faible'}"/>
-                    </p:column>
-                    <p:column headerText="Normal" footerText="#{teamBuilder2MBean.totalFaiblesse.type.normal}">
-                        <h:outputText value="#{faible.type.normal}" styleClass="#{faible.type.normal== null ? '' : 'faible'}"/>
-                    </p:column>
-                    <p:column headerText="Plante" footerText="#{teamBuilder2MBean.totalFaiblesse.type.plante}">
-                        <h:outputText value="#{faible.type.plante}" styleClass="#{faible.type.plante== null ? '' : 'faible'}"/>
-                    </p:column>
-                    <p:column headerText="Poison" footerText="#{teamBuilder2MBean.totalFaiblesse.type.poison}">
-                        <h:outputText value="#{faible.type.poison}" styleClass="#{faible.type.poison== null ? '' : 'faible'}"/>
-                    </p:column>
-                    <p:column headerText="Psy" footerText="#{teamBuilder2MBean.totalFaiblesse.type.psy}">
-                        <h:outputText value="#{faible.type.psy}" styleClass="#{faible.type.psy== null ? '' : 'faible'}"/>
-                    </p:column>
-                    <p:column headerText="Roche" footerText="#{teamBuilder2MBean.totalFaiblesse.type.roche}">
-                        <h:outputText value="#{faible.type.roche}" styleClass="#{faible.type.roche== null ? '' : 'faible'}"/>
-                    </p:column>
-                    <p:column headerText="Sol" footerText="#{teamBuilder2MBean.totalFaiblesse.type.sol}">
-                        <h:outputText value="#{faible.type.sol}" styleClass="#{faible.type.sol== null ? '' : 'faible'}"/>
-                    </p:column>
-                    <p:column headerText="Spectr" footerText="#{teamBuilder2MBean.totalFaiblesse.type.spectr}">
-                        <h:outputText value="#{faible.type.spectr}" styleClass="#{faible.type.spectr== null ? '' : 'faible'}"/>
-                    </p:column>
-                    <p:column headerText="Tenebr" footerText="#{teamBuilder2MBean.totalFaiblesse.type.tenebr}">
-                        <h:outputText value="#{faible.type.tenebr}" styleClass="#{faible.type.tenebr== null ? '' : 'faible'}"/>
-                    </p:column>
-                    <p:column headerText="Vol" footerText="#{teamBuilder2MBean.totalFaiblesse.type.vol}">
-                        <h:outputText value="#{faible.type.vol}" styleClass="#{faible.type.vol== null ? '' : 'faible'}"/>
-                    </p:column>
-                    <p:column headerText="Fee" footerText="#{teamBuilder2MBean.totalFaiblesse.type.fee}">
-                        <h:outputText value="#{faible.type.fee}" styleClass="#{faible.type.fee== null ? '' : 'faible'}"/>
-                    </p:column>
-                </p:dataTable>
-            </p:panel>
-            
             <p:dialog header="Ajouter un Pokémon" widgetVar="dialogAjoutPokemon">
                 <p:panelGrid columns="2" align="center" style="margin: 0 auto;" styleClass="panelGridBorder">
                     <p:outputLabel value="Pokemon : " /><p:inputText value="#{teamBuilder2MBean.espece}" style="width:150px"/>
@@ -235,7 +171,8 @@
                                 
                 </p:panelGrid>
             </p:dialog>
-           
+            
+            
          </h:form> 
 	</ui:define>
 

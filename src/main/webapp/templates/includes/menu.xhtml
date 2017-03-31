@@ -13,14 +13,19 @@
 	<h:form id="menuForm">
         <p:menubar>            
             <!-- Accueil -->
-            <p:menuitem id="maccueil" value="#{fr['menu.accueil']}" action="index"/>
+<!--             <p:menuitem id="maccueil" value="#{fr['menu.accueil']}" action="index"/> -->
+            <!-- Gestion des données -->
+            <p:menuitem id="mgestion" value="#{fr['general.gestion']}" action="gestion"/>
             
             <!-- Builder team -->
-            <p:menuitem id="mbuilder" value="#{fr['general.team.builder']}" action="builder"/>
+<!--             <p:menuitem id="mbuilder" value="#{fr['general.team.builder']}" action="builder"/> -->
             <p:menuitem id="mbuilder2" value="#{fr['general.team.builder']}" action="builder2"/>
             
+            <!-- Attaque/résistance/faiblesse -->
+            <p:menuitem id="mtype" value="#{fr['general.type']}" action="type"/>
             
-            <p:menuitem id="mtest" value="Page test" action="test"/>
+            <!-- Page pour faire des tests -->
+<!--             <p:menuitem id="mtest" value="Page test" action="test"/> -->
             
         </p:menubar>
 	</h:form>

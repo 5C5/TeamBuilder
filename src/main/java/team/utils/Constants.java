@@ -22,6 +22,9 @@ public final class Constants {
     /** Constante NON */
     public static final String NON = "non";
 
+    /** Equipe pokémon */
+    public static final String TEAM = "team";
+
     /** Type Acier */
     public static final String ACIER = "Acier";
     /** Type Combat */

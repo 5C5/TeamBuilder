@@ -1,0 +1,85 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:pe="http://primefaces.org/ui/extensions"
+                template="/templates/template.xhtml">
+
+    <ui:define name="head"></ui:define>
+    
+    <ui:define name="title">#{fr['general.type']}</ui:define>
+
+    <ui:define name="body-site">
+        <h:form id="formTeam">
+            
+            <p:panel style="margin: 0 auto;" header="Défenses">
+                <p:commandButton type="submit" value="Actualiser" update="tableFaiblesse" 
+                            actionListener="#{gestionMBean.calculFaiblesse}" ajax="true"/>
+                <p:dataTable var="faible" value="#{gestionMBean.listeFaiblesses}" id="tableFaiblesse">
+                    <p:column headerText="Pokémon">
+                        <p:outputLabel value="#{faible.espece} - #{faible.nom}"/>
+                    </p:column>
+                    <p:column headerText="Acier" footerText="#{gestionMBean.totalFaiblesse.type.acier}">
+                        <h:outputText value="#{faible.type.acier}" styleClass="#{faible.type.acier== null ? '' : 'faible'}"/>
+                    </p:column>
+                    <p:column headerText="Combat" footerText="#{gestionMBean.totalFaiblesse.type.combat}">
+                        <h:outputText value="#{faible.type.combat}" styleClass="#{faible.type.combat== null ? '' : 'faible'}"/>
+                    </p:column>
+                    <p:column headerText="Dragon" footerText="#{gestionMBean.totalFaiblesse.type.dragon}">
+                        <h:outputText value="#{faible.type.dragon}" styleClass="#{faible.type.dragon== null ? '' : 'faible'}"/>
+                    </p:column>
+                    <p:column headerText="Eau" footerText="#{gestionMBean.totalFaiblesse.type.eau}">
+                        <h:outputText value="#{faible.type.eau}" styleClass="#{faible.type.eau== null ? '' : 'faible'}"/>
+                    </p:column>
+                    <p:column headerText="Electr" footerText="#{gestionMBean.totalFaiblesse.type.electr}">
+                        <h:outputText value="#{faible.type.electr}" styleClass="#{faible.type.electr== null ? '' : 'faible'}"/>
+                    </p:column>
+                    <p:column headerText="Feu" footerText="#{gestionMBean.totalFaiblesse.type.feu}">
+                        <h:outputText value="#{faible.type.feu}" styleClass="#{faible.type.feu== null ? '' : 'faible'}"/>
+                    </p:column>
+                    <p:column headerText="Glace" footerText="#{gestionMBean.totalFaiblesse.type.glace}">
+                        <h:outputText value="#{faible.type.glace}" styleClass="#{faible.type.glace== null ? '' : 'faible'}"/>
+                    </p:column>
+                    <p:column headerText="Insect" footerText="#{gestionMBean.totalFaiblesse.type.insect}">
+                        <h:outputText value="#{faible.type.insect}" styleClass="#{faible.type.insect== null ? '' : 'faible'}"/>
+                    </p:column>
+                    <p:column headerText="Normal" footerText="#{gestionMBean.totalFaiblesse.type.normal}">
+                        <h:outputText value="#{faible.type.normal}" styleClass="#{faible.type.normal== null ? '' : 'faible'}"/>
+                    </p:column>
+                    <p:column headerText="Plante" footerText="#{gestionMBean.totalFaiblesse.type.plante}">
+                        <h:outputText value="#{faible.type.plante}" styleClass="#{faible.type.plante== null ? '' : 'faible'}"/>
+                    </p:column>
+                    <p:column headerText="Poison" footerText="#{gestionMBean.totalFaiblesse.type.poison}">
+                        <h:outputText value="#{faible.type.poison}" styleClass="#{faible.type.poison== null ? '' : 'faible'}"/>
+                    </p:column>
+                    <p:column headerText="Psy" footerText="#{gestionMBean.totalFaiblesse.type.psy}">
+                        <h:outputText value="#{faible.type.psy}" styleClass="#{faible.type.psy== null ? '' : 'faible'}"/>
+                    </p:column>
+                    <p:column headerText="Roche" footerText="#{gestionMBean.totalFaiblesse.type.roche}">
+                        <h:outputText value="#{faible.type.roche}" styleClass="#{faible.type.roche== null ? '' : 'faible'}"/>
+                    </p:column>
+                    <p:column headerText="Sol" footerText="#{gestionMBean.totalFaiblesse.type.sol}">
+                        <h:outputText value="#{faible.type.sol}" styleClass="#{faible.type.sol== null ? '' : 'faible'}"/>
+                    </p:column>
+                    <p:column headerText="Spectr" footerText="#{gestionMBean.totalFaiblesse.type.spectr}">
+                        <h:outputText value="#{faible.type.spectr}" styleClass="#{faible.type.spectr== null ? '' : 'faible'}"/>
+                    </p:column>
+                    <p:column headerText="Tenebr" footerText="#{gestionMBean.totalFaiblesse.type.tenebr}">
+                        <h:outputText value="#{faible.type.tenebr}" styleClass="#{faible.type.tenebr== null ? '' : 'faible'}"/>
+                    </p:column>
+                    <p:column headerText="Vol" footerText="#{gestionMBean.totalFaiblesse.type.vol}">
+                        <h:outputText value="#{faible.type.vol}" styleClass="#{faible.type.vol== null ? '' : 'faible'}"/>
+                    </p:column>
+                    <p:column headerText="Fee" footerText="#{gestionMBean.totalFaiblesse.type.fee}">
+                        <h:outputText value="#{faible.type.fee}" styleClass="#{faible.type.fee== null ? '' : 'faible'}"/>
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+            
+           
+         </h:form> 
+	</ui:define>
+
+</ui:composition>
